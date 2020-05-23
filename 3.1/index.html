@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <button onclick="start()">New Game</button>
+
+  <div id="container">
+
+  </div>
+
+  <div id="palettes">
+    <h3>Terrain</h3>
+    <div class="bg-info w-25" id="blue">
+      <!-- <input type="checkbox" id="blue" name="terrain" value="blue"> -->
+      <label for="terrain"> Blue</label><br>
+    </div>
+    <div class="bg-success w-25" id="green">
+      <!-- <input type="checkbox" name="terrain" value="green"> -->
+      <label for="terrain"> Green</label><br>
+    </div>
+  </div>
+
+  <div id="objects">
+    <h3>Terrain</h3>
+    <div class="w-25 ml-5">
+      1
+    </div>
+    <div class="w-25 ml-5">
+      2
+    </div>
+    <div class="w-25 ml-5">
+      3
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal fade bg-info" id="new-game" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title" id="exampleModalLongTitle">New Game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-body bg-warning">
+          <div class="container">
+            <div class="row mt-4">
+              <div class="col-4 text-left mt-2">
+                <label>Sorok szama</label>
+              </div>
+              <div class="col-8 text-left mt-2 w-100">
+                <input type="text" id="row">
+              </div>
+              <div class="col-4 text-left mt-2">
+                <label>oszlopok szama</label>
+              </div>
+              <div class="col-8 text-left mt-2 w-100">
+                <input type="text" id="col">
+              </div>
+              <div class="col-4"></div>
+              <div class="col-8">
+                <input type="button" value="Start" onclick="newGame();">
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <script>
+    let map;
+    let terrain;
+    let selectedObject;
+
+    document.getElementById('palettes').addEventListener('click', (event) => {
+      const value = event.target.id.toString()
+      terrain = value
+    })
+
+    document.getElementById('objects').addEventListener('click', (event) => {
+      const value = event.target.innerText
+      selectedObject = value
+      console.log(selectedObject)
+    })
+
+
+
+    const start = () => {
+      $(document).ready(function () {
+        $('#new-game').modal();
+      });
+    }
+
+    const newGame = () => {
+      const row = document.getElementById('row')
+      const col = document.getElementById('col')
+      const rowSize = row.value
+      const colSize = col.value
+
+      if (isNaN(parseInt(rowSize)) || isNaN(parseInt(colSize))) {
+        return
+      }
+      map = createBoard(parseInt(rowSize), parseInt(colSize))
+      const gameTable = generateHTML()
+
+      const container = document.getElementById('container')
+      container.innerHTML = gameTable
+
+      $(document).ready(function () {
+        $('#new-game').modal('hide');
+      });
+
+      document.getElementById('map').addEventListener('click', (event) => {
+        document.getElementById(event.target.id).classList.add(terrain)
+        document.getElementById(event.target.id).style.backgroundColor = terrain
+        if (document.getElementById(event.target.id).classList.contains('green')) {
+          if (selectedObject) {
+            document.getElementById(event.target.id).innerHTML = selectedObject
+          }
+        }
+      })
+    }
+
+
+    const createBoard = (rowSize, colSize) => {
+      const map = Array(rowSize).fill(new Array(colSize))
+      for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[i].length; j++) {
+          map[i][j] = "";
+        }
+      }
+      return map
+    }
+
+    const header = `<div class="container mt-5">\n
+                      <div class="row w-50 min-vh-50">\n
+                      <div class="table-responsive">\n
+                      <table class="table table-striped table-bordered table-hover" id="map">\n`
+    let table = '';
+
+
+    function generateHTML() {
+      let col;
+      let row = -1;
+      // tudom, hogy nem definialjuk a stylet a tablazat minden soraban de meg nem irtam semmilyen css-t :D
+      //olyan id-val latok el minden mezot, amiben benne van az oszlop es sor szama, igy amikor majd megkapom a front-endtol az id-t konnyen visszakonvertalhatom a megfelelo oszlop es sor szamava
+      for (let i = 0; i < map.length; i++) {
+        table += `<tr class="bg-info">\n`
+        row++;
+        col = 0;
+        for (let j = 0; j < map[i].length; j++) {
+          table += `<td id="${col++},${row}" class="align-middle text-center text-light" style="margin:0; padding: 0;" width="40px" height="40px">${map[i][j]}</td>\n`
+        }
+        table += `</tr>\n`
+      }
+
+      const generatedTable = `${header}${table}</table></div></div></div>`
+      console.log(generatedTable)
+      return generatedTable
+    }
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

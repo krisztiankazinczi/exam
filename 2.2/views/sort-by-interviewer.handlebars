@@ -1,0 +1,71 @@
+<form action="/sort" method="post" class="mt-5">
+  <div class="row mt-3">
+    <div class="col-4"></div>
+    <div class="col-8">
+      <h2>Sort By Interviewer</h2>
+    </div>
+
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Interviewer</p>
+    </div>
+    <div class="col-3 text-left">
+      <select name="id" class="w-100">
+        <option value="">Select Interviewer</option>
+        {{#each interviewers}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5"></div>
+    <div class="col-3 text-left">
+      <input type="submit" class="btn btn-info w-100" value="Sort">
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+<div class="table-responsive mt-5">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <div class="row">
+        <div class="col-2">
+          <th class="align-middle text-left">Applicant Name</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Phase</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Interviewer name</th>
+        </div>
+      </div>
+    </thead>
+    <tbody>
+      {{#each interviews}}
+      <div class="row">
+        <tr>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.id}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.name}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.email}}</td>
+          </div>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

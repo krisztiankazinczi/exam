@@ -1,0 +1,159 @@
+<div class="row text-center">
+    <h2>Registered Applicants, waiting for the first interview</h2>
+</div>
+<div class="table-responsive mt-5">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <div class="row">
+        <div class="col-2">
+          <th class="align-middle text-left">ID</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Name</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Email</th>
+        </div>
+      </div>
+    </thead>
+    <tbody>
+      {{#each registered}}
+      <div class="row">
+        <tr>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.id}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.name}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.email}}</td>
+          </div>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="row text-center mt-5">
+    <h2>First phase done, second phase is coming</h2>
+</div>
+<div class="table-responsive mt-5">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <div class="row">
+        <div class="col-2">
+          <th class="align-middle text-left">ID</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Name</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Email</th>
+        </div>
+      </div>
+    </thead>
+    <tbody>
+      {{#each firstPhase}}
+      <div class="row">
+        <tr>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.id}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.name}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.email}}</td>
+          </div>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="row text-center mt-5">
+    <h2>Second phase done, hired</h2>
+</div>
+<div class="table-responsive mt-5">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <div class="row">
+        <div class="col-2">
+          <th class="align-middle text-left">ID</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Name</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Email</th>
+        </div>
+      </div>
+    </thead>
+    <tbody>
+      {{#each hired}}
+      <div class="row">
+        <tr>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.id}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.name}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.email}}</td>
+          </div>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+
+<div class="row text-center mt-5">
+    <h2>Rejected Applicants</h2>
+</div>
+<div class="table-responsive mt-5">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <div class="row">
+        <div class="col-2">
+          <th class="align-middle text-left">ID</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Name</th>
+        </div>
+        <div class="col-2">
+          <th class="align-middle text-left">Email</th>
+        </div>
+      </div>
+    </thead>
+    <tbody>
+      {{#each rejected}}
+      <div class="row">
+        <tr>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.id}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.name}}</td>
+          </div>
+          <div class="col-2">
+            <td class="align-middle text-left">{{this.email}}</td>
+          </div>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+
+{{#if dbE}}
+<script>
+  alert('Database error, please try again later!')
+</script>
+{{/if}}

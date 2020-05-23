@@ -1,0 +1,44 @@
+<form action="/addNew" method="post" class="mt-5">
+  <div class="row mt-3">
+    <div class="col-5"></div>
+    <div class="col-4">
+      <h2>Add new Applicant</h2>
+    </div>
+
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Name</p>
+    </div>
+    <div class="col-3 text-left">
+      <input type="text" name="name" class="form-control">
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Email</p>
+    </div>
+    <div class="col-3 text-left">
+      <input type="text" name="email" class="form-control">
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5"></div>
+    <div class="col-3 text-left">
+      <input type="submit" class="btn btn-info w-100" value="Add new applicant">
+    </div>
+  </div>
+</form>
+
+
+{{#if emptyField}}
+<script>
+  alert('Please fill both fields!')
+</script>
+{{/if}}
+
+{{#if db}}
+<script>
+  alert('Database error, please try again later!')
+</script>
+{{/if}}

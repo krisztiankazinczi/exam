@@ -1,0 +1,61 @@
+<form action="/updatePhase" method="post" class="mt-5">
+  <div class="row mt-3">
+    <div class="col-4"></div>
+    <div class="col-8">
+      <h2>Update phase of applicant</h2>
+    </div>
+
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Name</p>
+    </div>
+    <div class="col-3 text-left">
+      <select name="applicant_id" class="w-100">
+        <option value="">Select Applicants</option>
+        {{#each applicants}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Select proper completed phase or rejected</p>
+    </div>
+    <div class="col-3 text-left">
+      <select name="phase" class="w-100">
+        <option value="firstPhase">FirstPhase Done</option>
+        <option value="hired">Hired</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5 text-right">
+      <p>Interviewer</p>
+    </div>
+    <div class="col-3 text-left">
+      <select name="interviewer_id" class="w-100">
+        <option value="">Select Interviewer</option>
+        {{#each interviewers}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-5"></div>
+    <div class="col-3 text-left">
+      <input type="submit" class="btn btn-info w-100" value="Update">
+    </div>
+  </div>
+</form>
+
+
+
+{{#if fieldError}}
+<script>
+  alert('Please fill both fields!')
+</script>
+{{/if}}
